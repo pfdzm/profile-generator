@@ -11,7 +11,13 @@ const octokit = Octokit({
 });
 
 const questions = [
-  { type: "input", name: "user", message: "GitHub username:" }
+  { type: "input", name: "user", message: "GitHub username:" },
+  {
+    type: "list",
+    name: "color",
+    message: "pick a color",
+    choices: ["red", "blue", "pink", "green"]
+  }
 ];
 
 function writeToFile(fileName, data) {
@@ -24,13 +30,11 @@ function writeToFile(fileName, data) {
 
 function init() {
   inquirer.prompt(questions).then(async answers => {
-    let username = answers.user;
-
     let { data } = await octokit.users.getByUsername({
-      username
+      username: answers.user
     });
 
-    writeToFile("index.html", { color: "red", user: data });
+    writeToFile("index.html", { color: answers.color, user: answers.user });
 
     console.log(data);
   });
