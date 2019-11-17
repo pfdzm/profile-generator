@@ -1,32 +1,4 @@
-const colors = {
-  green: {
-    wrapperBackground: "#E6E1C3",
-    headerBackground: "#C1C72C",
-    headerColor: "black",
-    photoBorderColor: "#black"
-  },
-  blue: {
-    wrapperBackground: "#5F64D3",
-    headerBackground: "#26175A",
-    headerColor: "white",
-    photoBorderColor: "#73448C"
-  },
-  pink: {
-    wrapperBackground: "#879CDF",
-    headerBackground: "#FF8374",
-    headerColor: "white",
-    photoBorderColor: "#FEE24C"
-  },
-  red: {
-    wrapperBackground: "#DE9967",
-    headerBackground: "#870603",
-    headerColor: "white",
-    photoBorderColor: "white"
-  }
-};
-
-function generateHTML(data) {
-  return `<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
    <head>
       <meta charset="UTF-8" />
@@ -52,7 +24,7 @@ function generateHTML(data) {
          height: 100%;
          }
          .wrapper {
-         background-color: ${colors[data.color].wrapperBackground};
+         background-color: #DE9967;
          padding-top: 100px;
          }
          body {
@@ -94,8 +66,8 @@ function generateHTML(data) {
          display: flex;
          justify-content: center;
          flex-wrap: wrap;
-         background-color: ${colors[data.color].headerBackground};
-         color: ${colors[data.color].headerColor};
+         background-color: #870603;
+         color: white;
          padding: 10px;
          width: 95%;
          border-radius: 6px;
@@ -106,7 +78,7 @@ function generateHTML(data) {
          border-radius: 50%;
          object-fit: cover;
          margin-top: -75px;
-         border: 6px solid ${colors[data.color].photoBorderColor};
+         border: 6px solid white;
          box-shadow: rgba(0, 0, 0, 0.3) 4px 1px 20px 4px;
          }
          .photo-header h1, .photo-header h2 {
@@ -149,8 +121,8 @@ function generateHTML(data) {
          .card {
            padding: 20px;
            border-radius: 6px;
-           background-color: ${colors[data.color].headerBackground};
-           color: ${colors[data.color].headerColor};
+           background-color: #870603;
+           color: white;
            margin: 20px;
          }
          
@@ -174,12 +146,7 @@ function generateHTML(data) {
     </head>
     <body>
       <div id="app">
-      <code>${JSON.stringify(data.user)}</code>
+      <code>{"login":"pfdzm","id":17315212,"node_id":"MDQ6VXNlcjE3MzE1MjEy","avatar_url":"https://avatars0.githubusercontent.com/u/17315212?v=4","gravatar_id":"","url":"https://api.github.com/users/pfdzm","html_url":"https://github.com/pfdzm","followers_url":"https://api.github.com/users/pfdzm/followers","following_url":"https://api.github.com/users/pfdzm/following{/other_user}","gists_url":"https://api.github.com/users/pfdzm/gists{/gist_id}","starred_url":"https://api.github.com/users/pfdzm/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/pfdzm/subscriptions","organizations_url":"https://api.github.com/users/pfdzm/orgs","repos_url":"https://api.github.com/users/pfdzm/repos","events_url":"https://api.github.com/users/pfdzm/events{/privacy}","received_events_url":"https://api.github.com/users/pfdzm/received_events","type":"User","site_admin":false,"name":"Pablo Fernandez Michel","company":"ESMT Berlin","blog":"https://pfdzm.github.io","location":"Berlin, Germany","email":null,"hireable":null,"bio":"Currently learning full-stack web dev at ESMT Berlin's Full-stack Flex Coding Bootcamp (powered by Trilogy)","public_repos":17,"public_gists":0,"followers":11,"following":22,"created_at":"2016-02-18T12:41:26Z","updated_at":"2019-11-17T14:47:43Z"}</code>
       </div>
     </body>
-  </html>`;
-}
-
-module.exports = {
-  generateHTML
-};
+  </html>
