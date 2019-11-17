@@ -3,7 +3,7 @@ const colors = {
     wrapperBackground: "#E6E1C3",
     headerBackground: "#C1C72C",
     headerColor: "black",
-    photoBorderColor: "#black"
+    photoBorderColor: "black"
   },
   blue: {
     wrapperBackground: "#5F64D3",
@@ -175,9 +175,15 @@ function generateHTML(data) {
     <body>
       <div class="wrapper">
         <main id="app" class="container">
-          <h1>${data.user.name}</h1>
-          <img class="photo-header" src="${data.user.avatar_url}" />
-          <code>${JSON.stringify(data.user)}</code>
+        <div class="card">
+          <div class="photo-header">
+            <img width="240" height="240" src="${data.user.avatar_url}" />
+            </div>
+            <div class="row">
+              <h1>${data.user.name}</h1>
+              <code>${JSON.stringify(data.user)}</code>
+            </div>
+          </div>
         </main>
       </div>
     </body>
