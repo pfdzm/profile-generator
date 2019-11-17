@@ -173,8 +173,12 @@ function generateHTML(data) {
       </style>
     </head>
     <body>
-      <div id="app">
-      <code>${JSON.stringify(data.user)}</code>
+      <div class="wrapper">
+        <main id="app" class="container">
+          <h1>${data.user.name}</h1>
+          <img class="photo-header" src="${data.user.avatar_url}" />
+          <code>${JSON.stringify(data.user)}</code>
+        </main>
       </div>
     </body>
   </html>`;

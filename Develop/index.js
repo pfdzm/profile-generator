@@ -34,7 +34,7 @@ function init() {
       username: answers.user
     });
 
-    writeToFile("index.html", { color: answers.color, user: answers.user });
+    writeToFile("index.html", { color: answers.color, user: data });
 
     console.log(data);
   });
