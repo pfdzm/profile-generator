@@ -1,43 +1,44 @@
 const inquirer = require("inquirer");
 const Octokit = require("@octokit/rest");
 const generator = require("./generateHTML.js");
-const fs = require("fs");
+const fs = require("fs").promises;
 
-// https://octokit.github.io/rest.js/#usage
-// User agent is required
-
-const octokit = Octokit({
-  userAgent: "portfolio-generator v0.1"
-});
-
-const questions = [
-  { type: "input", name: "user", message: "GitHub username:" },
-  {
-    type: "list",
-    name: "color",
-    message: "pick a color",
-    choices: ["red", "blue", "pink", "green"]
-  }
-];
-
-function writeToFile(fileName, data) {
+async function writeToFile(fileName, data) {
   let html = generator.generateHTML(data);
-  fs.writeFile(`./${fileName}`, html, function(err) {
-    if (err) throw err;
-    console.log("HTML generated!");
-  });
+  await fs.writeFile(`./${fileName}`, html);
 }
 
-function init() {
-  inquirer.prompt(questions).then(async answers => {
-    let { data } = await octokit.users.getByUsername({
-      username: answers.user
-    });
+async function getGitHubUser(answers) {
+  // https://octokit.github.io/rest.js/#usage
+  // User agent is required
+  const octokit = Octokit({
+    userAgent: "portfolio-generator v0.1"
+  });
 
-    writeToFile("index.html", { color: answers.color, user: data });
+  let { data } = await octokit.users.getByUsername({
+    username: answers.user
+  });
+  return data;
+}
+
+(async function init() {
+  const questions = [
+    { type: "input", name: "user", message: "Enter a GitHub username:" },
+    {
+      type: "list",
+      name: "color",
+      message: "Pick a color theme:",
+      choices: ["red", "blue", "pink", "green"]
+    }
+  ];
+  try {
+    let answers = await inquirer.prompt(questions);
+    let data = await getGitHubUser(answers);
+
+    await writeToFile("index.html", { color: answers.color, user: data });
 
     console.log(data);
-  });
-}
-
-init();
+  } catch (error) {
+    console.log(error);
+  }
+})();
