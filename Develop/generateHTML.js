@@ -61,7 +61,7 @@ function generateHTML(data) {
           height: 100%;
         }
         .wrapper {
-          background-color: #de9967;
+          background-color: ${colors[data.color].wrapperBackground};
           padding-top: 100px;
         }
         body {
@@ -108,8 +108,8 @@ function generateHTML(data) {
           display: flex;
           justify-content: center;
           flex-wrap: wrap;
-          background-color: #870603;
-          color: white;
+          background-color: ${colors[data.color].headerBackground};
+          color: ${colors[data.color].headerColor};
           padding: 10px;
           width: 95%;
           border-radius: 6px;
@@ -120,7 +120,7 @@ function generateHTML(data) {
           border-radius: 50%;
           object-fit: cover;
           margin-top: -75px;
-          border: 6px solid white;
+          border: 6px solid ${colors[data.color].photoBorderColor};
           box-shadow: rgba(0, 0, 0, 0.3) 4px 1px 20px 4px;
         }
         .photo-header h1,
@@ -165,8 +165,8 @@ function generateHTML(data) {
         .card {
           padding: 20px;
           border-radius: 6px;
-          background-color: #870603;
-          color: white;
+          background-color: ${colors[data.color].headerBackground};
+          color: ${colors[data.color].headerColor};
           margin: 20px;
         }
   
@@ -198,7 +198,10 @@ function generateHTML(data) {
           <h5>Currently @ ${data.user.company}</h5>
           <div class="row">
             <div class="col">
-              <a href="#">Berlin, Germany</a>
+              <a href="https://www.google.com/maps/place/${data.user.location.replace(
+                /\s/,
+                "+"
+              )}">${data.user.location}</a>
             </div>
             <div class="col">
               <a href="${data.user.html_url}">GitHub</a>
