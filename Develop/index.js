@@ -11,10 +11,15 @@ async function getGitHubUser(answers) {
     userAgent: "portfolio-generator v0.1"
   });
 
-  let { data } = await octokit.users.getByUsername({
-    username: answers.user
-  });
-  return data;
+  try {
+    let { data } = await octokit.users.getByUsername({
+      username: answers.user
+    });
+    console.log(`Fetched GitHub data for user ${data.login}`);
+    return data;
+  } catch (error) {
+    console.log("Could not fetch GitHub data");
+  }
 }
 
 async function printPDF(html) {
@@ -53,7 +58,6 @@ async function printPDF(html) {
       user: data
     });
     await printPDF(html);
-    console.log(data);
   } catch (error) {
     console.log(error);
   }
