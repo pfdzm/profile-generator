@@ -1,14 +1,8 @@
 const inquirer = require("inquirer");
 const Octokit = require("@octokit/rest");
 const generator = require("./generateHTML.js");
-const fs = require("fs").promises;
 const puppeteer = require("puppeteer");
 const path = require("path");
-
-async function writeToFile(fileName, data) {
-  let html = generator.generateHTML(data);
-  await fs.writeFile(`./${fileName}`, html);
-}
 
 async function getGitHubUser(answers) {
   // https://octokit.github.io/rest.js/#usage
@@ -23,7 +17,7 @@ async function getGitHubUser(answers) {
   return data;
 }
 
-async function printPDF() {
+async function printPDF(html) {
   try {
     const browser = await puppeteer.launch({
       // these arguments allow puppeteer to work on WSL 2 without going through quite a bit of work to set up a viable sandbox
@@ -32,9 +26,8 @@ async function printPDF() {
       args: ["--no-sandbox", "--disable-setuid-sandbox"]
     });
     const page = await browser.newPage();
-    await page.goto(`file:${path.join(__dirname, "index.html")}`);
+    await page.setContent(html);
     await page.pdf({ path: path.join(__dirname, "profile.pdf"), format: "A4" });
-
     await browser.close();
     console.log("PDF generated!");
   } catch (error) {
@@ -55,11 +48,11 @@ async function printPDF() {
   try {
     let answers = await inquirer.prompt(questions);
     let data = await getGitHubUser(answers);
-    await writeToFile("index.html", {
+    let html = generator.generateHTML({
       color: answers.color,
       user: data
     });
-    await printPDF();
+    await printPDF(html);
     console.log(data);
   } catch (error) {
     console.log(error);
