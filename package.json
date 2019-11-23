@@ -13,6 +13,6 @@
     "@octokit/rest": "^16.35.0",
     "fs": "0.0.1-security",
     "inquirer": "^7.0.0",
-    "pdf-puppeteer": "^1.1.9"
+    "puppeteer": "^2.0.0"
   }
 }
