@@ -193,24 +193,22 @@ function generateHTML(data) {
       <div class="wrapper">
         <div class="photo-header">
           <img width="240" height="240" src="${data.user.avatar_url}" />
-          <h1>Hi!</h1>
-          <h1>My name is ${data.user.name}!</h1>
-          <h5>Currently @ ${data.user.company}</h5>
-          <div class="row">
-            <div class="col">
-              <a href="https://www.google.com/maps/place/${data.user.location.replace(
+            <h1>Hi!</h1>
+            <h1>My name is ${data.user.name}!</h1>
+            <h3>Currently @ ${data.user.company}</h3>    
+            <ul class="links-nav">
+              <li class="nav-link">              <a href="https://www.google.com/maps/place/${data.user.location.replace(
                 /\s/,
                 "+"
               )}">${data.user.location}</a>
-            </div>
-            <div class="col">
-              <a href="${data.user.html_url}">GitHub</a>
-            </div>
-            <div class="col"><a href="#{data.user.blog}">Blog</a></div>
-          </div>
+    </li>
+              <li class="nav-link">              <a href="${data.user.html_url}">GitHub</a>
+              </li>
+              <li class="nav-link"><a href="#{data.user.blog}">Blog</a></li>
+            </ul>
         </div>
         <main>
-          <div class="row"></div>
+            <div class="container">
           <div class="row">
             <div class="col">
               <h3>${data.user.bio}</h3>
@@ -243,7 +241,7 @@ function generateHTML(data) {
                 <h5>${data.user.following}</h5>
               </div>
             </div>
-          </div>
+          </div></div>
         </main>
       </div>
     </body>

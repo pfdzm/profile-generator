@@ -31,7 +31,7 @@ async function printPDF(html) {
       args: ["--no-sandbox", "--disable-setuid-sandbox"]
     });
     const page = await browser.newPage();
-    await page.setContent(html);
+    await page.setContent(html, {waitUntil: "networkidle0"});
     await page.pdf({ path: path.join(__dirname, "profile.pdf"), format: "A4" });
     await browser.close();
     console.log("PDF generated!");
